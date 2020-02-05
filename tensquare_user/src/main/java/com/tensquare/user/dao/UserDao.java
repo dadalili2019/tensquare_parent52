@@ -10,5 +10,12 @@ import com.tensquare.user.pojo.User;
  *
  */
 public interface UserDao extends JpaRepository<User,String>,JpaSpecificationExecutor<User>{
+
+    /**
+     * 根据电话查询用户
+     * @param mobile
+     * @return
+     */
+    public User findByMobile(String mobile);
 	
 }
