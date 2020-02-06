@@ -3,6 +3,7 @@ package com.tensquare.qa.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.tensquare.qa.client.BaseClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,21 @@ public class ProblemController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private BaseClient baseClient;
+
+    /**
+     * Feign远程调用服务测试
+     *
+     * @param labelId
+     * @return
+     */
+    @RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
+    public Result findByLabelId(@PathVariable String labelId) {
+        Result result = baseClient.findById(labelId);
+        return result;
+    }
 
     @RequestMapping(value = "/newlist/{labelid}/{page}/{size}", method = RequestMethod.GET)
     public Result newlist(@PathVariable String labelid, @PathVariable int page, @PathVariable int size) {
